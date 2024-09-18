@@ -31,7 +31,7 @@ bot.on("message", async (msg) => {
   const text = msg.text;
 
   if (text === "/start") {
-    bot.sendMessage(chatId, `Salom, ${msg.from.first_name}! Yana o'ynash uchun pastdagi tugmani bosing.`, createGameMenu());
+    bot.sendMessage(chatId, `Salom, ${msg.from.first_name}! O'ynash uchun pastdagi tugmani bosing.`, createGameMenu());
   }
 });
 
@@ -51,7 +51,7 @@ bot.on("callback_query", (query) => {
     };
 
     // O'yin boshlanishi xabari
-    bot.sendMessage(chatId, "Men 1 dan 100 gacha raqam tanladim. Sizda 5 urinish va 30 soniya vaqt bor. Raqamingizni kiriting.");
+    bot.sendMessage(chatId, "Men 1 dan 100 gacha raqam tanladim. Sizda uni topish uchun 5 urinish va 30 soniya vaqt bor. Raqamni kiriting.");
   }
 });
 
@@ -65,7 +65,7 @@ bot.on("message", async (msg) => {
 
     // Vaqt o'tganini tekshirish
     if (Date.now() > userGame.time) {
-      bot.sendMessage(chatId, "Vaqt tugadi!");
+      bot.sendMessage(chatId, `Vaqt tugadi! Raqam ${userGame.number} edi.`);
       delete games[chatId]; // O'yinni o'chirish
       bot.sendMessage(chatId, "Yana o'ynash uchun pastdagi tugmani bosing.", createGameMenu());
       return;
@@ -80,7 +80,7 @@ bot.on("message", async (msg) => {
 
     // Kiritilgan raqam to'g'ri bo'lsa
     if (guessedNumber === userGame.number) {
-      bot.sendMessage(chatId, `Tabriklaymiz! Siz ${userGame.number} raqamini topdingiz.`);
+      bot.sendMessage(chatId, `🎉 Tabriklaymiz! Siz ${userGame.number} raqamini topdingiz.`);
       delete games[chatId]; // O'yin tugadi, ma'lumotni o'chirish
       bot.sendMessage(chatId, "Yana o'ynash uchun pastdagi tugmani bosing.", createGameMenu());
     } else {
